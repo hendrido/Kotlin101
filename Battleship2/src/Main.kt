@@ -26,7 +26,7 @@ fun main(args: Array<String>) {
 }
 
 fun executeAttackOrder(coordinates: String, battleField: Array<Array<Int?>>){
-    println("Sending missile to $coordinates...")
+    println("Sending missile to $coordinates... ")
     val y = coordinates.elementAt(0).toString()
     val tmp = coordinates.removeRange(0,1)
     val x = tmp.toInt()
