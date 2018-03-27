@@ -1,0 +1,465 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <title>Kotlin 101</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName('head')[0].appendChild(link);
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown>
+                    <textarea data-template>
+                            # Kotlin 101                         
+                    </textarea>
+        </section>
+        <section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ## Introduction
+                            - Why Kotlin?
+                            - Intellij IDEA
+                            - Hello Kotlin
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Why Kotlin?
+                            - Compiles to Java
+                            - Advantages to Java:
+                                - Avoid nullpointers!!
+                                - Faster compilation time
+                                - Less boilerplate
+                                - Give functions as parameter to other function
+                                - easy to read -> Make testcases readable
+                            - Fun to learn new languages!
+
+                            - Also disadvantages???
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Intellij IDEA
+                            - https://www.jetbrains.com/idea/download
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Hello Kotlin!
+                            - Open Intellij IDEA
+                            - Create new project
+                            - Select "Kotlin" -> "Kotlin/JVM"
+                            - Name project   
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+### Hello Kotlin!
++ src -> Right mouse click -> New -> Kotlin file
++ Name file "Main"
++ Add main function
++ Add logic to say hello
+
+```kotlin
+fun main(args: Array<String>) {
+    println("Hello Kotlin!")
+}
+```
+
+Result
+```Shell
+Hello Kotlin!
+
+Process finished with exit code 0
+```
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Hello Kotlin!
+                            - Corresponded Java code
+                            - Tools -> Kotlin -> Show Kotlin ByteCode -> Decompile
+                            ```java
+                            public static final void main(@NotNull String[] args) {
+      Intrinsics.checkParameterIsNotNull(args, "args");
+      String var1 = "Hello Kotlin";
+      System.out.println(var1);
+   }```
+                        </textarea>
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ## Basic Kotlin
+                            - Variables
+                            - Types
+                            - Nullable variables
+                            - Flow control
+                            - Collections
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Variables
+```kotlin
+// Basic syntax
+val/var name: Type = value
+
+// Read-only
+val readOnlyVariable: String = "I'm a read-only variable"
+
+// Read-write
+var readWriteVariable: String = "I'm a read-write variable"
+
+// Inferred types
+val inferredTypeVariable = "I know i'm a String"
+```
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Types
+```kotlin
+// Decimals
+val int: Int = 15
+val long: Long = 15L
+val short: Short = 15
+val byte: Byte = 15
+
+// Floating-point
+val double: Double = 15.0
+val float: Float = 15.0F
+
+// Special notations
+val hex: Int = 0x0F
+val bin: Int = 0b00001111
+```
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Types
+                            - Any -> Any?
+                            - Nothing
+                            - Unit? - maybe better in functions
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Types
+```kotlin
+// Underscores
+val oneMillion = 1_000_000
+val creditCardNumber = 1234_5678_9012_3456L
+val socialSecurityNumber = 999_99_9999L
+val hexBytes = 0xFF_EC_DE_5E
+val bytes = 0b11010010_01101001_10010100_10010010
+``` 
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Nullable variables
+```kotlin
+// Notation
+var name: Type? = value
+
+var nullableString: String? = null
+nullableString = "not null anymore"
+
+var nullableInt: Int? = 5
+nullableInt = null
+```
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            #### Nullable safety
+```kotlin
+var i: Int? = null
+
+// will not build since "null + 5" = error
+val j = i.plus(5)   
+
+// "plus 5" will only be executed when i != null
+// if i == null -> k = null
+val k: Int? = i?.plus(5) 
+
+// Elvis operator: when i == null -> m = 0
+val m: Int = i?.plus(5) ?: 0
+
+// Force not null (NOT RECOMMENDED!!!)
+val n: Int = i!!.plus(5)
+```
+                        </textarea>
+            </section>
+
+            <section data-markdown>
+                        <textarea data-template>
+                            #### let's have some fun
+```kotlin
+val s: String? = null
+s?.let(::println)   // print s when not null
+
+var i: Int? = null
+i?.let { println(it + 5) }  // print i + 5 when i is not null
+
+var a: Int? = null
+a?.let {
+    if(it > 0)  // "it" is reference to "a" inside let-block
+        println("$it > 0")  // $it references "a" inside string
+    else
+        println("$it <= 0")
+}
+```
+                        </textarea>
+            </section>
+
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Flow control
+                            - If
+                            - When
+                            - For
+                            - While
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Flow control
+```kotlin
+// Without else expression
+if (a < b) println("$a is smaller then $b")
+
+// With else expression
+if (a > b) {
+println("$a is bigger then $b")
+} else {
+println("$a is smaller or equal to $b")
+}
+
+// directly assign result to value
+val max = if (a > b) a else b
+```
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Flow control
+```kotlin
+// check value of x
+when (x) {
+    1 -> print("x == 1")
+    2,3 -> print("x is 2 or 3")
+    in 4..10 -> print("x is in the range")
+    in validNumbers -> print("x is valid")
+    else -> { print("x is neither of the options") }
+}
+```
+
+```kotlin
+// Check type of x
+fun hasPrefix(x: Any) = when(x) {
+    is String -> x.startsWith("prefix")
+    else -> false
+}
+```
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Flow control
+```kotlin
+// collections
+for (item in collection) println("item = $item")
+```
+
+```kotlin
+// Ranges
+for (i in 1..3) {
+    println(i)
+}
+for (i in 6 downTo 0 step 2) {
+    println(i)
+}
+```
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Flow control
+```kotlin
+while (x > 0) {
+    x--
+}
+```
+
+```kotlin
+do {
+    val y = retrieveData()
+} while (y != null)
+```
+                        </textarea>
+            </section>
+            <section data-markdown>
+                        <textarea data-template>
+                            ### Collections
+                            - Examples
+                            - Mutable vs immutable
+                            - Map, List, MutableList, Set
+                            - Some functions like .first, .values, .filter,...
+                            - listOf(), setOf(),...
+                        </textarea>
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                    <textarea data-template>
+                            ## Fun 'ctions
+                            - basic syntax for return type, no return type
+                            - also syntax with a one liner
+                            - briefly give some examples (relates much to java)
+                            - Parameter with default value
+                            - Examples
+                            - Excercises
+                    </textarea>
+            </section>
+            <section data-markdown>
+                    <textarea data-template>
+                            ## Fun 'ctions
+```kotlin
+fun double(x: Int): Int {
+        return 2 * x
+        }
+
+val result = double(2)
+```
+
+
+                            - Default argument
+
+```kotlin
+fun read(b: Int, a: Int = 0, max: Int = b.size) {
+println("")
+}
+```
+                    </textarea>
+            </section>
+            <section data-markdown>
+                    <textarea data-template>
+                            ## Fun 'ctions
+                            - Oneliner
+
+```kotlin
+fun double(x: Int): Int = 2 * x
+```
+                    </textarea>
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                    <textarea data-template>
+                            ## Classes
+                            - Classes
+                            - Inheritance
+                            - Interfaces
+                            - Extensions
+                                - override syntax
+                            - Objects
+                            - Data classes
+                    </textarea>
+            </section>
+            <section data-markdown>
+                    <textarea data-template>
+                            ## Classes
+                            - Remarks:
+                                - compare to Java
+                                - Classes -> types of classes, calling functions in Classes
+                                - Only briefly since it relates much to Java
+                    </textarea>
+            </section>
+        </section>
+        <section data-markdown>
+                    <textarea data-template>
+                            # Power of Kotlin
+                    </textarea>
+        </section>
+        <section data-markdown>
+                    <textarea data-template>
+                            ## Awesome functionality
+                        - Infix funtions
+                            - Only 1 param allowed :(
+                        - companion objects
+                        - Class exposing (automation trick)
+                        - Sealed classes
+                        - Type aliases
+                        - Real world example (automation example)
+                    </textarea>
+        </section>
+
+        <section data-markdown>
+                    <textarea data-template>
+                            # Appendix
+                    </textarea>
+        </section>
+        <section data-markdown>
+                    <textarea data-template>
+                            ## Build tools
+                            - Run kotlin from console
+                    </textarea>
+        </section>
+
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                dependencies: [
+                    {src: 'plugin/markdown/marked.js'},
+                    {src: 'plugin/markdown/markdown.js'},
+                    {src: 'plugin/notes/notes.js', async: true},
+                    {src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                            hljs.initHighlightingOnLoad();
+                        }}
+                ]
+            });
+
+
+
+
+
+
+</script>
+</body>
+</html>
