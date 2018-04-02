@@ -181,6 +181,7 @@ j . . . . . . . . . .
                             - Nullable variables
                             - Flow control
                             - Collections
+                            - Battleship pt1
                         </textarea>
             </section>
             <section data-markdown>
@@ -281,7 +282,7 @@ val n: Int = i!!.plus(5)
 
             <section data-markdown>
                         <textarea data-template>
-                            #### let's have some fun
+                            #### Let operator
 ```kotlin
 val s: String? = null
 s?.let(::println)   // print s when not null
@@ -394,9 +395,77 @@ do {
                             - Map, List, MutableList, Set
                             - Some functions like .first, .values, .filter,...
                             - listOf(), setOf(),...
+                            - 2D arrays (needed in project)
                         </textarea>
             </section>
+<!--  Battleship: Display the battlefield -->
+            <section data-markdown>
+                    <textarea data-template>
+                        ### Battleship: Display the battlefield
+                        - Display empty battlefield
+                        - Add row names
+                        - Add column numbers
+                        - Print different symbols for:
+                            - Default
+                            - Impact (nothing hit)
+                            - Impact (ship hit) 
+                    </textarea>
+            </section>
+            <section data-markdown>
+                    <textarea data-template>
+                        ### Display empty battlefield
+                        - Create matrix which represents the battlefield *by using a 2D array of Int's*
+                        - Fill matrix with default values
+                        ```Bash
+                        0 = sea => .
+                        1 = impact (nothing hit) => _
+                        2 = ship (invisible) => .
+                        3 = impact (ship hit)  => #
+                        ```
+                        - Loop through rows and columns using *for-loops*
+                        - Print a symbol for each location (e.g. a dot)
+                    </textarea>
+            </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+                        ### Add row and column prefix
+                        - Add row names using a *list of strings* 
+                        - Add column numbers using a *range*
+
+                        ```Bash 
+                        a . . . . . . . . . .
+                        b . . . . . . . . . .
+                        c . . . . . . . . . .
+                        d . . . . . . . . . .
+                        e . . . . . . . . . .
+                        f . . . . . . . . . .
+                        g . . . . . . . . . .
+                        h . . . . . . . . . .
+                        i . . . . . . . . . .
+                        j . . . . . . . . . .
+                          1 2 3 4 5 6 7 8 9 10
+                        ```
+                    </textarea>
+            </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+                        ### Print correct symbols
+                        - Print the correct symbol based on value in matrix
+                        - Use a *when-condition* 
+
+                        ```Bash
+                        0 = .
+                        1 = _
+                        2 = .
+                        3 = #
+                        ```
+                    </textarea>
+            </section>
+
         </section>
+<!-- FUNCTIONS -->        
         <section>
             <section data-markdown>
                     <textarea data-template>
